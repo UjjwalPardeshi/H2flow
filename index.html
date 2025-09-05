@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>H2flow Controls Chatbot</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f2f5;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    #chatbot-container {
+      width: 350px;
+      max-height: 450px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      background: #fff;
+    }
+    #chatbot-header {
+      padding: 10px;
+      font-weight: bold;
+      background-color: #0078D7;
+      color: #fff;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      text-align: center;
+    }
+    #chat-area {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background-color: #f7f7f7;
+      min-height: 300px;
+    }
+    .message {
+      max-width: 80%;
+      padding: 8px 12px;
+      border-radius: 16px;
+      white-space: pre-wrap;
+    }
+    .bot-message {
+      align-self: flex-start;
+      background-color: #e5e5ea;
+      color: black;
+    }
+    .user-message {
+      align-self: flex-end;
+      background-color: #0078D7;
+      color: white;
+    }
+    #input-area {
+      display: flex;
+      padding: 10px;
+      border-top: 1px solid #ddd;
+    }
+    #input-area textarea {
+      flex: 1;
+      resize: none;
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      font-family: inherit;
+    }
+    #send-button {
+      margin-left: 8px;
+      background-color: #0078D7;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 0 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<div id="chatbot-container">
+  <div id="chatbot-header">H2flow Controls Chatbot</div>
+  <div id="chat-area"></div>
+  <div id="input-area">
+    <textarea id="user-input" rows="1" placeholder="Type your message..."></textarea>
+    <button id="send-button">Send</button>
+  </div>
+</div>
+
+<script src="/script.js"></script>
+
+</body>
+</html>
