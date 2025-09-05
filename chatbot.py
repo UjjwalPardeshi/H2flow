@@ -18,7 +18,7 @@ model = genai.GenerativeModel("gemini-2.5-flash")
 app = FastAPI()
 origins = [
     "http://localhost:5500",
-    "https://your-vercel-frontend-url",
+    "h2flow.vercel.app",
     "https://your-render-backend-url"
 ]
 app.add_middleware(
