@@ -21,7 +21,7 @@ async function sendMessage() {
   userInput.value = "";
 
   try {
-    const response = await fetch("https://your-render-backend-url/api/chat", {
+    const response = await fetch("wss://h2flow.onrender.com/ws/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: text }),
