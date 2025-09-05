@@ -2,6 +2,26 @@ const chatArea = document.getElementById("chat-area");
 const userInput = document.getElementById("user-input");
 const sendButton = document.getElementById("send-button");
 
+// Create and open WebSocket connection
+const ws = new WebSocket("wss://h2flow.onrender.com/ws/chat");
+
+ws.onopen = () => {
+  addMessage("bot", "Hello! How can I assist you with H2flow Controls today?");
+};
+
+ws.onmessage = (event) => {
+  addMessage("bot", event.data);
+};
+
+ws.onerror = (error) => {
+  addMessage("bot", "Network error. Please check your connection.");
+  console.error("WebSocket error:", error);
+};
+
+ws.onclose = () => {
+  addMessage("bot", "Connection closed.");
+};
+
 function addMessage(from, text) {
   const msgDiv = document.createElement("div");
   msgDiv.textContent = text;
@@ -11,36 +31,17 @@ function addMessage(from, text) {
   chatArea.scrollTop = chatArea.scrollHeight;
 }
 
-// Initial greeting from bot
-addMessage("bot", "Hello! How can I assist you with H2flow Controls today?");
-
-async function sendMessage() {
+sendButton.addEventListener("click", () => {
   const text = userInput.value.trim();
   if (!text) return;
   addMessage("user", text);
+  ws.send(text);
   userInput.value = "";
+});
 
-  try {
-    const response = await fetch("wss://h2flow.onrender.com/ws/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: text }),
-    });
-    if (!response.ok) {
-      addMessage("bot", "Sorry, something went wrong. Please try again.");
-      return;
-    }
-    const data = await response.json();
-    addMessage("bot", data.reply);
-  } catch (err) {
-    addMessage("bot", "Network error. Please check your connection.");
-  }
-}
-
-sendButton.addEventListener("click", sendMessage);
 userInput.addEventListener("keydown", (e) => {
   if (e.key === "Enter" && !e.shiftKey) {
     e.preventDefault();
-    sendMessage();
+    sendButton.click();
   }
 });
