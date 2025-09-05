@@ -44,7 +44,6 @@ INSTRUCTIONS:
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     try:
-        # Start Gemini chat session with system prompt as initial context
         chat = model.start_chat(history=[{"role": "user", "parts": [h2flow_prompt]}])
         while True:
             message = await websocket.receive_text()
@@ -58,5 +57,4 @@ async def websocket_endpoint(websocket: WebSocket):
         logging.info("Client disconnected")
     except Exception as e:
         logging.error(f"Unexpected exception: {e}")
-    finally:
-        await websocket.close()
+    # Remove the finally block that calls `await websocket.close()`
