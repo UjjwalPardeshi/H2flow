@@ -19,7 +19,7 @@ app = FastAPI()
 origins = [
     "http://localhost:5500",
     "h2flow.vercel.app",
-    "https://your-render-backend-url"
+    "https://h2flow.onrender.com"
 ]
 app.add_middleware(
     CORSMiddleware,
